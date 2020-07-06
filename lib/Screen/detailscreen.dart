@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodtastee/Screen/cartscreen.dart';
 
 class DetailScreen extends StatefulWidget {
   final String image;
@@ -19,6 +20,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int counting = 1;
+  double total=50;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +79,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
-                                    '\$ ${widget.price}',
+                                    '\$ ${widget.price * counting}',
                                     style: TextStyle(
                                         color: Color(0xff00d2ed), fontSize: 22),
                                   ),
@@ -116,6 +118,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               onPressed: () {
                                                 setState(() {
                                                   counting++;
+                                                  
                                                 });
                                               }),
                                         ),
@@ -250,7 +253,10 @@ class _DetailScreenState extends State<DetailScreen> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                           Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => CartScreen()));
+                        },
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(10.0),
                         ),
