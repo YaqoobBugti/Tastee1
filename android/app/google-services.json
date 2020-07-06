@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "257042465282",
+    "firebase_url": "https://foodtastee-6733c.firebaseio.com",
+    "project_id": "foodtastee-6733c",
+    "storage_bucket": "foodtastee-6733c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257042465282:android:67789f23949c3815631d1b",
+        "android_client_info": {
+          "package_name": "com.example.foodtastee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257042465282-r75g92pvjk5cmvq0pvlcllv3tqhfu71t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHXpvvkgdNB3zYRc74k2WYpKM2J9H4umk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257042465282-r75g92pvjk5cmvq0pvlcllv3tqhfu71t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
