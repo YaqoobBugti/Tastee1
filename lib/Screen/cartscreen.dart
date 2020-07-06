@@ -1,81 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:foodtastee/Provider/foodProvider.dart';
+import 'package:provider/provider.dart';
 import './homescreen.dart';
 import "../Widgets/Button.dart";
 
-class CartScreen extends StatelessWidget {
-  Widget container() {
+class CartScreen extends StatefulWidget {
+  @override
+  _CartScreenState createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  FoodProvider provider;
+  Widget container(BuildContext context, int myIndex) {
+    var allFoodCart = provider.getFoodCart;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      height: 75,
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          color: Color(0xffffffff),
-          borderRadius: BorderRadius.circular(10.0)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            height: double.infinity,
-            width: 130,
-            // color: Colors.yellow,
-            child: Row(
-              children: <Widget>[
-                CircleAvatar(
-                  maxRadius: 30,
-                  backgroundImage: AssetImage("images/pasta.jpg"),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 5),
-                  child: Text(
-                    "1x",
-                    style: TextStyle(color: Colors.grey, fontSize: 20),
-                  ),
-                )
-              ],
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        height: 75,
+        decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey),
+      color: Color(0xffffffff),
+      borderRadius: BorderRadius.circular(10.0)),
+        child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      Container(
+        height: double.infinity,
+        width: 130,
+        // color: Colors.yellow,
+        child: Row(
+          children: <Widget>[
+            CircleAvatar(
+              maxRadius: 30,
+              backgroundImage: NetworkImage(allFoodCart[myIndex].foodImage),
             ),
-          ),
-          Container(
-            height: double.infinity,
-            width: 130,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text(
-                  "Pasta cheese",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Text("7 oceans Hotel"),
-              ],
+            SizedBox(
+              width: 30,
             ),
-          ),
-          Container(
-              padding: EdgeInsets.only(right: 10),
-              height: 50,
-              width: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    "\$50",
-                    style: TextStyle(
-                        color: Color(0xff04d4ee),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  )
-                ],
-              )),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 5, left: 5),
+              child: Text(
+                "${allFoodCart[myIndex].foodQuantity.toString()}x",
+                style: TextStyle(color: Colors.grey, fontSize: 20),
+              ),
+            )
+          ],
+        ),
       ),
-    );
+      Container(
+        height: double.infinity,
+        width: 130,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text(
+              allFoodCart[myIndex].foodName,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(allFoodCart[myIndex].foodType),
+          ],
+        ),
+      ),
+      Container(
+          padding: EdgeInsets.only(),
+          height: 50,
+          width: 100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                "\$${allFoodCart[myIndex].foodPrice}",
+                style: TextStyle(
+                    color: Color(0xff04d4ee),
+                    fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),),
+    ],
+        ),
+      );
   }
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<FoodProvider>(context);
+    
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -86,32 +97,24 @@ class CartScreen extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () {
-               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => HomeScreen()));
-            }),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
+        ),
       ),
       body: Column(
         children: <Widget>[
           Expanded(
             flex: 4,
             child: Container(
-              child: ListView( 
-                children: <Widget>[
-                  container(),
-                  container(),
-                  container(),
-                  container(),
-                  container(),
-                  container(),
-                  container(),
-                  container(),
-                  container(),
-                ],
+              child: ListView.builder(
+                itemBuilder: container,
+                itemCount: provider.foodCartLength,
               ),
             ),
           ),
@@ -119,7 +122,6 @@ class CartScreen extends StatelessWidget {
             height: 20,
           ),
           Expanded(
-            
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               color: Theme.of(context).primaryColor,
@@ -145,7 +147,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                   Button(
-                    buttoncolors:Colors.white,
+                    buttoncolors: Colors.white,
                     textcolor: Theme.of(context).primaryColor,
                     tittle: "Submit",
                     whenpress: () {},

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../Provider/foodProvider.dart';
 import 'package:foodtastee/Screen/cartscreen.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
   final String image;
@@ -8,7 +10,7 @@ class DetailScreen extends StatefulWidget {
   final double price;
 
   DetailScreen({
-   @required this.price,
+    @required this.price,
     @required this.image,
     @required this.foodName,
     @required this.foodsubtittle,
@@ -19,10 +21,13 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  int counting = 1;
-  double total=50;
+  int count = 1;
+  double totalPrice;
+  FoodProvider provider;
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<FoodProvider>(context);
+
     return Scaffold(
       body: Container(
         child: Column(
@@ -79,7 +84,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
-                                    '\$ ${widget.price * counting}',
+                                    "\$${totalPrice == null ? widget.price.toString() : totalPrice}",
                                     style: TextStyle(
                                         color: Color(0xff00d2ed), fontSize: 22),
                                   ),
@@ -100,12 +105,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ),
                                               onPressed: () {
                                                 setState(() {
-                                                  if (counting > 1) counting--;
+                                                  if (count > 1) count--;
+                                                  totalPrice =
+                                                      widget.price * count;
                                                 });
                                               }),
                                         ),
                                         Text(
-                                          "${counting.toString()}",
+                                          "${count.toString()}",
                                           style: TextStyle(
                                               color: Color(0xff00d2ed)),
                                         ),
@@ -117,8 +124,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ),
                                               onPressed: () {
                                                 setState(() {
-                                                  counting++;
-                                                  
+                                                  count++;
+                                                  totalPrice =
+                                                      widget.price * count;
                                                 });
                                               }),
                                         ),
@@ -254,8 +262,18 @@ class _DetailScreenState extends State<DetailScreen> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                           Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => CartScreen()));
+                          provider.addFoodCart(
+                            widget.foodName,
+                            widget.foodsubtittle,
+                            count,
+                            widget.image,
+                            totalPrice == null ? widget.price : totalPrice,
+                          );
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => CartScreen(),
+                            ),
+                          );
                         },
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(10.0),
