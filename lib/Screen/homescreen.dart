@@ -8,6 +8,8 @@ import './detailscreen.dart';
 import './about.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Model/food.dart';
+import '../searchbar/search.dart';
+import '../searchbar/data_page.dart';
 
 class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
@@ -97,8 +99,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         child: TextField(
           decoration: InputDecoration(
-            suffixIcon: Icon(
-              Icons.search,
+            suffixIcon: IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch(listWords));
+              },
+              icon: Icon(Icons.search),
               color: Theme.of(context).primaryColor,
             ),
             hintText: 'Want to search anything',
@@ -384,14 +389,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Text(
                                               "Featured",
                                               style: TextStyle(
-                                                  color: Color(0xff04d4ee),
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
                                                   fontSize: 30,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Text(
                                               "View All",
                                               style: TextStyle(
-                                                  color: Color(0xff04d4ee),
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
                                                   fontSize: 19),
                                             ),
                                           ],

@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
                         style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xfffe257e)),
+                            color:Theme.of(context).primaryColor,),
                       ),
                       SizedBox(
                         height: 5,
@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
                       Text(
                         "Welcome back!",
                         style:
-                            TextStyle(fontSize: 20, color: Color(0xfffe257e)),
+                            TextStyle(fontSize: 20, color: Theme.of(context).primaryColor,),
                       )
                     ],
                   ),
@@ -170,7 +170,7 @@ class _LoginState extends State<Login> {
                             },
                             child: Text(
                               "Signup",
-                              style: TextStyle(color: Color(0xfffe257e)),
+                              style: TextStyle(color: Theme.of(context).primaryColor,),
                             ),
                           ),
                         ],

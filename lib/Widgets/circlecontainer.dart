@@ -73,7 +73,7 @@ class CircleContainer extends StatelessWidget {
                         "\$ ${price.toString()}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff04d4ee),
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ],

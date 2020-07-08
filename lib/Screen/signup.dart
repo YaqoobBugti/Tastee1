@@ -265,7 +265,7 @@ class _SignUpState extends State<SignUp> {
                                   style: TextStyle(
                                       fontSize: 40,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xfffe257e)),
+                                      color: Theme.of(context).primaryColor,),
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -273,7 +273,7 @@ class _SignUpState extends State<SignUp> {
                                 Text(
                                   "create an account",
                                   style: TextStyle(
-                                      fontSize: 20, color: Color(0xfffe257e)),
+                                      fontSize: 20, color: Theme.of(context).primaryColor,),
                                 )
                               ],
                             ),
@@ -286,7 +286,7 @@ class _SignUpState extends State<SignUp> {
                           child: Container(
                             child: CircleAvatar(
                               maxRadius: 64,
-                              backgroundColor: Colors.red,
+                              backgroundColor: Theme.of(context).primaryColor,
                               child: CircleAvatar(
                                 maxRadius: 60,
                                 backgroundImage: _image == null

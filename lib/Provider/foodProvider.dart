@@ -10,19 +10,26 @@ class FoodProvider with ChangeNotifier {
     int foodQuntites,
     String foodImage,
     double foodPrice,
-  ) {
+  ){
     foodcart = FoodCart(
-       foodName: foodName,
-       foodQuantity: foodQuntites,
+        foodName: foodName,
+        foodQuantity: foodQuntites,
         foodPrice: foodPrice,
         foodType: foodType,
         foodImage: foodImage);
-        foodcardlist.add(foodcart);
+    foodcardlist.add(foodcart);
   }
+
   List<FoodCart> get getFoodCart {
     return List.from(foodcardlist);
-  } 
+  }
+
   int get foodCartLength {
+
     return foodcardlist.length;
+  }
+  void delete(int index){
+    foodcardlist.removeAt(index);
+    notifyListeners();
   }
 }

@@ -10,83 +10,113 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  double total = 0.0;
   FoodProvider provider;
   Widget container(BuildContext context, int myIndex) {
     var allFoodCart = provider.getFoodCart;
-    return Container(
+
+    return Dismissible(
+      key: UniqueKey(),
+      onDismissed: (rovider) {
+        setState(() {
+          provider.delete(myIndex);
+          total -=allFoodCart[myIndex].foodPrice;
+          // var pricepeice = provider.foodcardlist;
+          // pricepeice.forEach((element) {
+          //   total -= element.foodPrice;
+          // });
+        });
+      },
+      child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         height: 75,
         decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey),
-      color: Color(0xffffffff),
-      borderRadius: BorderRadius.circular(10.0)),
+            border: Border.all(color: Colors.grey),
+            color: Color(0xffffffff),
+            borderRadius: BorderRadius.circular(10.0)),
         child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      Container(
-        height: double.infinity,
-        width: 130,
-        // color: Colors.yellow,
-        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            CircleAvatar(
-              maxRadius: 30,
-              backgroundImage: NetworkImage(allFoodCart[myIndex].foodImage),
-            ),
-            SizedBox(
-              width: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 5, left: 5),
-              child: Text(
-                "${allFoodCart[myIndex].foodQuantity.toString()}x",
-                style: TextStyle(color: Colors.grey, fontSize: 20),
+            Container(
+              height: double.infinity,
+              width: 130,
+              // color: Colors.yellow,
+              child: Row(
+                children: <Widget>[
+                  CircleAvatar(
+                    maxRadius: 30,
+                    backgroundImage:
+                        NetworkImage(allFoodCart[myIndex].foodImage),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5, left: 5),
+                    child: Text(
+                      "${allFoodCart[myIndex].foodQuantity.toString()}x",
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
-      ),
-      Container(
-        height: double.infinity,
-        width: 130,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(
-              allFoodCart[myIndex].foodName,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            Text(allFoodCart[myIndex].foodType),
+            Container(
+              height: double.infinity,
+              width: 130,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    allFoodCart[myIndex].foodName,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  Text(allFoodCart[myIndex].foodType),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(),
+              height: 50,
+              width: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    "\$${allFoodCart[myIndex].foodPrice}",
+                    style: TextStyle(
+                      color: Color(0xff04d4ee),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      Container(
-          padding: EdgeInsets.only(),
-          height: 50,
-          width: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                "\$${allFoodCart[myIndex].foodPrice}",
-                style: TextStyle(
-                    color: Color(0xff04d4ee),
-                    fontWeight: FontWeight.bold,
-                ),
-              )
-            ],
-          ),),
-    ],
-        ),
-      );
+    );
+  }
+
+  @override
+  void initState() {
+    provider = Provider.of<FoodProvider>(context, listen: false);
+    var pricepeice = provider.foodcardlist;
+    pricepeice.forEach((element) {
+      total += element.foodPrice;
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    provider = Provider.of<FoodProvider>(context);
-    
+    // provider = Provider.of<FoodProvider>(context);
+    // var pricepeice = provider.foodcardlist;
+    // pricepeice.forEach((element) {
+    //   total += element.foodPrice;
+    // });
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -140,7 +170,7 @@ class _CartScreenState extends State<CartScreen> {
                           style: TextStyle(fontSize: 22, color: Colors.white),
                         ),
                         Text(
-                          "\$360",
+                          "\$ $total",
                           style: TextStyle(fontSize: 22, color: Colors.white),
                         ),
                       ],
