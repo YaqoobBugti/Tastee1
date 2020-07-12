@@ -53,7 +53,7 @@ class _CartScreenState extends State<CartScreen> {
                     width: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 5),
+                    padding: const EdgeInsets.only(top: 5,),
                     child: Text(
                       "${allFoodCart[myIndex].foodQuantity.toString()}x",
                       style: TextStyle(color: Colors.grey, fontSize: 20),
@@ -64,7 +64,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
             Container(
               height: double.infinity,
-              width: 130,
+              width: 120,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -80,7 +80,7 @@ class _CartScreenState extends State<CartScreen> {
             Container(
               padding: EdgeInsets.only(),
               height: 50,
-              width: 100,
+              width: 80,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[

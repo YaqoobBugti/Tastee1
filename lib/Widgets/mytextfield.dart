@@ -8,18 +8,21 @@ class MYTextField extends StatelessWidget {
   MYTextField({this.hintText,this.controller,this.obscuretext,this.keyboard});
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboard,
-      controller: controller,
-      obscureText: obscuretext,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Color(0xfffef6fa),
-        border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(10)),
-        hintText: hintText,
-        hintStyle: TextStyle(color: Colors.grey,fontSize: 22),
+    return Container(
+    margin: EdgeInsets.only(bottom: 10),
+      child: TextFormField(
+        keyboardType: keyboard,
+        controller: controller,
+        obscureText: obscuretext,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Color(0xfffef6fa),
+          border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(10)),
+          hintText: hintText,
+          hintStyle: TextStyle(color: Colors.grey,fontSize: 22),
+        ),
       ),
     );
   }

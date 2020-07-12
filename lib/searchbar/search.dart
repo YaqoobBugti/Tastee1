@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import './detile.dart';
 import './data_page.dart';
+
 class DataSearch extends SearchDelegate<String> {
   final List<ListWords> listWords;
+
   DataSearch(this.listWords);
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -48,7 +51,7 @@ class DataSearch extends SearchDelegate<String> {
 
     final suggestionList = query.isEmpty
         ? listWords
-        :listWords
+        : listWords
             .where((p) =>
                 p.titlelist.contains(RegExp(query, caseSensitive: false)))
             .toList();

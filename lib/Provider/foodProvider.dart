@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:foodtastee/Model/food.dart';
 import '../Model/foodcart.dart';
 
 class FoodProvider with ChangeNotifier {
   List<FoodCart> foodcardlist = [];
   FoodCart foodcart;
+   List<Food> foodList = [];
   void addFoodCart(
     String foodName,
     String foodType,
@@ -20,6 +22,14 @@ class FoodProvider with ChangeNotifier {
     foodcardlist.add(foodcart);
   }
 
+    void addFoodList({
+    String foodName,
+    String foodType,
+    String foodimage,
+    double foodprice,
+  }) {}
+
+
   List<FoodCart> get getFoodCart {
     return List.from(foodcardlist);
   }
@@ -31,5 +41,11 @@ class FoodProvider with ChangeNotifier {
   void delete(int index){
     foodcardlist.removeAt(index);
     notifyListeners();
+  }
+    List<Food> get getfoodList {
+    return foodList;
+  }
+  List<Food> get getMyFoodList {
+    return foodList;
   }
 }

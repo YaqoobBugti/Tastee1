@@ -285,7 +285,7 @@ class _SignUpState extends State<SignUp> {
                           },
                           child: Container(
                             child: CircleAvatar(
-                              maxRadius: 64,
+                              maxRadius: 54,
                               backgroundColor: Theme.of(context).primaryColor,
                               child: CircleAvatar(
                                 maxRadius: 60,
@@ -301,10 +301,9 @@ class _SignUpState extends State<SignUp> {
               ),
               Expanded(
                 flex: 3,
-                child: Container(
-                  //color: Colors.green,
+                child: SingleChildScrollView(
+
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       MYTextField(
                         hintText: "Full Name",
@@ -330,6 +329,7 @@ class _SignUpState extends State<SignUp> {
                         obscuretext: true,
                         keyboard: TextInputType.visiblePassword,
                       ),
+                   
                       GestureDetector(
                         onTap: () {
                           setState(() {
@@ -350,12 +350,14 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
+                      SizedBox(height: 10,),
                       MYTextField(
                         hintText: "Address",
                         controller: adress,
                         obscuretext: false,
                         keyboard: TextInputType.text,
                       ),
+                      SizedBox(height: 10,),
                       if (lodding)
                         CircularProgressIndicator(
                           backgroundColor: Colors.pink,

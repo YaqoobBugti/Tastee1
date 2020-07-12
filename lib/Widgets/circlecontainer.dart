@@ -6,7 +6,7 @@ class CircleContainer extends StatelessWidget {
   final String image;
   final double ratting;
   final Function onPress;
-  CircleContainer({this.ratting,this.image, this.price, this.subtext, this.text, this.onPress});
+  CircleContainer({this.ratting,this.image, this.price, this.subtext, this.text, this.onPress ,BuildContext context});
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -15,8 +15,8 @@ class CircleContainer extends StatelessWidget {
           onTap: onPress,
           child: Container(
             margin: EdgeInsets.symmetric(horizontal:20, vertical: 20),
-            height: 190,
-            width: 166,
+            height: 160,
+            width: 150,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
@@ -89,7 +89,7 @@ class CircleContainer extends StatelessWidget {
             padding: EdgeInsets.only(left: 85, bottom: 29),
             child: CircleAvatar(
               backgroundImage: NetworkImage(image),
-              maxRadius: 60,
+              maxRadius: 50,
             ),
           ),
         ),

@@ -3,8 +3,8 @@ import 'package:foodtastee/Provider/foodProvider.dart';
 import 'package:foodtastee/Screen/homescreen.dart';
 import 'package:foodtastee/Screen/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodtastee/try/test.dart';
 import 'package:provider/provider.dart';
-import './try/Text.dart';
 
 
 void main() => runApp(MyApp());
@@ -24,9 +24,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           accentColor: Color(0xff758085),
-          primaryColor: Colors.black,
+          primaryColor: Color(0xfff05c18),
         ),
         debugShowCheckedModeBanner: false,
+  
         home: StreamBuilder(
             stream: FirebaseAuth.instance.onAuthStateChanged,
             builder: (ctx, userSnapshot) {

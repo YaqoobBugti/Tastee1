@@ -29,7 +29,7 @@ class _DetailScreenState extends State<DetailScreen> {
     provider = Provider.of<FoodProvider>(context);
 
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Stack(
@@ -37,7 +37,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Column(
                   children: <Widget>[
                     Container(
-                      height: 235,
+                      height: 150,
                       width: double.infinity,
                       color: Color(0xfffef6fa),
                     ),
@@ -48,7 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      height: 381,
+                      height: 281,
                       width: double.infinity,
                       color: Colors.white,
                       child: Container(
@@ -66,9 +66,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
+                                
                                 Text(
                                   widget.foodsubtittle,
                                   style: TextStyle(
@@ -252,7 +250,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                     Container(
                       height: 60,
-                      width: 400,
+                      width: double.infinity,
                       child: RaisedButton(
                         textColor: Colors.white,
                         color: Theme.of(context).primaryColor,
@@ -283,9 +281,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   ],
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 80, top: 45),
+                    padding: const EdgeInsets.only(left: 90, top: 60),
                     child: CircleAvatar(
-                      maxRadius: 130,
+                      maxRadius: 90,
                       backgroundImage: NetworkImage(widget.image),
                     ))
               ],
