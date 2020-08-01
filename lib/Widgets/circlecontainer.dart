@@ -15,8 +15,8 @@ class CircleContainer extends StatelessWidget {
           onTap: onPress,
           child: Container(
             margin: EdgeInsets.symmetric(horizontal:20, vertical: 20),
-            height: 160,
-            width: 150,
+            height: 180,
+            width: 170,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),

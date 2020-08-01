@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../Widgets/MYtextfield.dart';
 import '../Widgets/Button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,6 +46,73 @@ class _SignUpState extends State<SignUp> {
   bool gender = true;
   File _image;
 
+  // Future<bool> loginUser(String phone, BuildContext context) async {
+  //   FirebaseAuth _auth = FirebaseAuth.instance;
+  //   _auth.verifyPhoneNumber(
+  //     phoneNumber: phone,
+  //     timeout: Duration(seconds: 60),
+  //     verificationCompleted: (AuthCredential credential) async {
+  //       AuthResult result = await _auth.signInWithCredential(credential);
+  //       FirebaseUser user = result.user;
+  //       Navigator.of(context).pop();
+  //       if (user != null) {
+  //         Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //               builder: (context) => HomeScreen(),
+  //             ));
+  //       }
+  //       else{print("error");}
+  //     },
+  //     verificationFailed: (AuthException exception) {
+  //       print(exception);
+  //     },
+  //     codeSent: (String verificationId, [int forceResendToken]) {
+  //       showDialog(
+  //           context: context,
+  //           barrierDismissible: false,
+  //           builder: (context) {
+  //             return AlertDialog(
+  //               title: Text("Give code"),
+  //               content: Column(
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 children: <Widget>[
+  //                   TextField(
+  //                     controller: phonecode,
+  //                   ),
+  //                 ],
+  //               ),
+  //               actions: <Widget>[
+  //                 FlatButton(
+  //                   onPressed: () async {
+  //                     final code = phone.trim();
+  //                     AuthCredential credential =
+  //                         PhoneAuthProvider.getCredential(
+  //                             verificationId: verificationId, smsCode: code);
+  //                     _auth.signInWithCredential(credential);
+  //                     if (User != null) {
+  //                       Navigator.push(
+  //                           context,
+  //                           MaterialPageRoute(
+  //                             builder: (context) => HomeScreen(),
+  //                           ));
+  //                     }
+  //                     else{
+  //                       print("error");
+  //                     }
+  //                   },
+  //                   textColor: Colors.white,
+  //                   color: Colors.blue,
+  //                   child: Text("confirm"),
+  //                 )
+  //               ],
+  //             );
+  //           });
+  //     },
+  //     codeAutoRetrievalTimeout: null,
+  //   );
+  // }
+
   Future getImage() async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
 
@@ -55,10 +123,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<Map<String, String>> uploadFile(File _image) async {
     String _imagePath = _image.path;
-
-    StorageReference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('images/${Path.basename(_imagePath)}');
+    StorageReference storageReference = FirebaseStorage.instance.ref().child('images/${Path.basename(_imagePath)}');
     StorageUploadTask uploadTask = storageReference.putFile(_image);
     StorageTaskSnapshot task = await uploadTask.onComplete;
     final String _imageUrl = (await task.ref.getDownloadURL());
@@ -82,6 +147,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController password = TextEditingController();
   final TextEditingController all = TextEditingController();
   final TextEditingController adress = TextEditingController();
+  final TextEditingController phonecode = TextEditingController();
   void function() {
     if (_image == null) {
       _scaffoldKey.currentState.showSnackBar(
@@ -263,9 +329,10 @@ class _SignUpState extends State<SignUp> {
                                 Text(
                                   "Signup",
                                   style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).primaryColor,),
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -273,7 +340,9 @@ class _SignUpState extends State<SignUp> {
                                 Text(
                                   "create an account",
                                   style: TextStyle(
-                                      fontSize: 20, color: Theme.of(context).primaryColor,),
+                                    fontSize: 20,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                                 )
                               ],
                             ),
@@ -302,7 +371,6 @@ class _SignUpState extends State<SignUp> {
               Expanded(
                 flex: 3,
                 child: SingleChildScrollView(
-
                   child: Column(
                     children: <Widget>[
                       MYTextField(
@@ -329,7 +397,6 @@ class _SignUpState extends State<SignUp> {
                         obscuretext: true,
                         keyboard: TextInputType.visiblePassword,
                       ),
-                   
                       GestureDetector(
                         onTap: () {
                           setState(() {
@@ -350,14 +417,18 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       MYTextField(
                         hintText: "Address",
                         controller: adress,
                         obscuretext: false,
                         keyboard: TextInputType.text,
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       if (lodding)
                         CircularProgressIndicator(
                           backgroundColor: Colors.pink,
@@ -367,8 +438,9 @@ class _SignUpState extends State<SignUp> {
                           buttoncolors: Theme.of(context).primaryColor,
                           textcolor: Colors.white,
                           tittle: "Signup",
-                          whenpress: (){
+                          whenpress: () {
                             function();
+                            
                           },
                         ),
                     ],

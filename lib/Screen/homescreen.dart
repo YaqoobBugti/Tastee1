@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   Food foodpasta;
   Food foodchicken;
   Food searchFood;
@@ -96,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget search() {
     return Positioned(
-      top: MediaQuery.of(context).padding.top / 0.2 - 20,
+      top: 160,////////////
       left: 20,
       right: 20,
       child: GestureDetector(
@@ -161,12 +162,14 @@ class _HomeScreenState extends State<HomeScreen> {
             price: element["foodPrice"],
             foodsubTittle: element["foodsubTittle"]);
         provider.getfoodList.add(searchFood);
+        print(element['ratting']);
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    
     inputData();
     return Scaffold(
       drawer: Drawer(

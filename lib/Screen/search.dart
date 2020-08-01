@@ -11,7 +11,7 @@ class Search extends SearchDelegate<Food> {
       IconButton(
           icon: Icon(Icons.clear),
           onPressed: () {
-            query = "";
+            query ="";
           }),
     ];
   }
